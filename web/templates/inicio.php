@@ -6,18 +6,21 @@
 
     <!-- Descripción -->
     <p class="home-description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. 
-        Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.
+        Nuestra aplicación está diseñada para que puedas guardar y organizar todas tus encadenes de escalada, 
+        ya sean rutas deportivas, clásicas o de búlder.
+        Con ella, podrás registrar cada intento, éxito o fallo, y mantener un historial completo de tus progresos. 
+        Además, la app genera estadísticas personalizadas que te ayudarán a analizar tu rendimiento, 
+        identificar patrones y planificar tus próximos desafíos. ¡Así podrás escalar mejor y seguir superándote en cada ruta!
     </p>
 
     <!-- Botones -->
     <div class="home-buttons">
-        <a href="/login" class="btn btn-login">Iniciar sesión</a>
-        <a href="/register" class="btn btn-register">Registrarse</a>
+        <a href="index.php?ctl=login" class="btn btn-login">Iniciar sesión</a>
+        <a href="index.php?ctl=registro" class="btn btn-register">Registrarse</a>
     </div>
 </div>
 
-<?php 
-$contenido= ob_get_clean();
+<?php
+$contenido = ob_get_clean();
 include 'layout.php';
 ?>
