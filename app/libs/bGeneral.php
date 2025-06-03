@@ -403,5 +403,32 @@ function crypt_blowfish($password) {
     }
 
     
+
+    function cEmail(string $email, string $campo, array &$errores, int $max = 254): bool
+{
+    // Verificamos la longitud máxima (254 es el estándar máximo para un email)
+    if (strlen($email) > $max) {
+        $errores[$campo] = "El campo $campo supera el máximo de $max caracteres.";
+        return false;
+    }
+
+    // Validación con filtro y expresión regular adicional para control
+    if (filter_var($email, FILTER_VALIDATE_EMAIL) &&
+        preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email)) {
+        return true;
+    }
+
+    $errores[$campo] = "El campo $campo no es un email válido.";
+    return false;
+}
+
+function encriptar($password, $cost=10) {
+    return password_hash($password, PASSWORD_DEFAULT, ['cost' => $cost]);
+}
+
+function comprobarhash($pass, $passBD) {
+    // Primero comprobamos si se ha empleado una contraseña correcta:
+    return password_verify($pass, $passBD) ;
+}
     
     ?>

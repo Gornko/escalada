@@ -25,7 +25,7 @@
         <input type="password" id="confirm_password" name="confirm_password" required placeholder="Repite la contraseña">
         <br><br>
 
-        <button type="submit" class="btn btn-register">Registrarse</button>
+        <button type="submit" class="btn btn-register" name="bRegistro">Registrarse</button>
     </form>
 </div>
 

@@ -5,6 +5,9 @@ require_once __DIR__."/../app/libs/bGeneral.php";
 require_once __DIR__."/../app/libs/Config.php";
 require_once __DIR__."/../app/modelo/Model.php";
 require_once __DIR__ . '/../app/controlador/Controller.php';
+require_once __DIR__."/../app/modelo/RutasEscalada.php";
+
+
 
 
 //iniciamos la sesion
