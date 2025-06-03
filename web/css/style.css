@@ -18,12 +18,33 @@ body {
 /* Header: básico */
 header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #222;
+    background-color: #296978;
     color: white;
-    gap: 1.5rem; /* separa infoUser y logout-button */
+}
+
+.main-menu {
+    display: flex;
+    gap: 20px;
+}
+
+.main-menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.main-menu a:hover {
+    color: #ccc;
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .infoUser {
@@ -126,3 +147,15 @@ header {
     object-fit: cover;
 }
 
+.footer {
+    background-color: #296978;
+    color: #fff;
+    padding: 20px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
