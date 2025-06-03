@@ -7,9 +7,16 @@ class Controller
         require __DIR__ . "/../../web/templates/inicio.php";
     }
 
-    public function login()
+    public function home()
     {
-        require __DIR__ . "/../../web/templates/login.php";
+        require __DIR__ . "/../../web/templates/home.php";
+    }
+
+    public function logout()
+    {
+        session_destroy();
+
+        header("location:index.php?ctl=inicio");
     }
 
     public function error()
@@ -23,10 +30,10 @@ class Controller
     {
 
         if ($_SESSION['nivel'] > 0) {
-            header("location:index.php?ctl=inicio");
+            header("location:index.php?ctl=home");
         }
 
-        $errores=[];
+        $errores = [];
         $params = array(
             'nombreUsuario' => '',
             'email' => '',
@@ -53,7 +60,8 @@ class Controller
                     $m = new RutasEscalada();
                     if ($m->insertarUsuario($nombreUsuario, $email, encriptar($contrasenya))) {
 
-                        header('Location: index.php?ctl=registro');
+                        $params['mensaje'] = 'Usuario registrado correctamente.';
+                       
                     } else {
 
                         $params = array(
@@ -89,6 +97,68 @@ class Controller
     //fin funcion registrar usuarios
 
 
+    //empieza funcion iniciar sesion/login
+    public function login()
+    {
+        try {
+            $params = array(
+                'nombreUsuario' => '',
+                'contrasenya' => ''
+            );
 
-    
+
+            if ($_SESSION['nivel'] > 0) {
+                header("location:index.php?ctl=home");
+            }
+            if (isset($_POST['bLogin'])) { // Nombre del boton del formulario
+                $nombreUsuario = recoge('username');
+                $contrasenya = recoge('password');
+
+                // Comprobar campos formulario. Aqui va la validación con las funciones de bGeneral   
+                if (cUser($nombreUsuario, "nombreUsuario", $params)) {
+                    // Si no ha habido problema creo modelo y hago consulta                    
+                    $m = new RutasEscalada();
+                    if ($usuario = $m->consultarUsuario($nombreUsuario)) {
+                        // Compruebo si el password es correcto
+                        if (comprobarhash($contrasenya, $usuario['password_hash'])) {
+                            // Obtenemos el resto de datos
+
+                            $_SESSION['idUser'] = $usuario['id'];
+                            $_SESSION['nombreUsuario'] = $usuario['username'];
+                            if ($usuario['role'] == 'admin') {
+                                $_SESSION['nivel'] = 2;
+                            } else {
+                                $_SESSION['nivel'] = 1;
+                            }
+
+
+                            header('Location: index.php?ctl=home');
+                        }
+                    } else {
+                        $params = array(
+                            'nombreUsuario' => $nombreUsuario,
+                            'contrasenya' => $contrasenya
+                        );
+                        $params['mensaje'] = 'No se ha podido iniciar sesión. Revisa el formulario.';
+                    }
+                } else {
+                    $params = array(
+                        'nombreUsuario' => $nombreUsuario,
+                        'contrasenya' => $contrasenya
+                    );
+                    $params['mensaje'] = 'Hay datos que no son correctos. Revisa el formulario.';
+                }
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logExceptio.txt");
+            header('Location: index.php?ctl=error');
+        } catch (Error $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logError.txt");
+            header('Location: index.php?ctl=error');
+        }
+        require __DIR__ . '/../../web/templates/login.php';
+    }
+    //fin funcion login
+
+
 }

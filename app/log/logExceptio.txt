@@ -1,0 +1,1 @@
+SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Pau' for key 'username'0.02033200 1748959665

@@ -11,4 +11,11 @@ class RutasEscalada extends Model{
         return $result;
     }
 
+    public function consultarUsuario($nombreUsuario) {
+        $consulta = "SELECT * FROM escalada.users WHERE username=:nombreUsuario ";
+        $result = $this->conection->prepare($consulta);
+        $result->bindParam(':nombreUsuario', $nombreUsuario);
+        $result->execute();
+        return $result->fetch(PDO::FETCH_ASSOC);
+    }
 }

@@ -1,3 +1,4 @@
+
 /* Reset básico */
 * {
     margin: 0;
@@ -16,10 +17,12 @@ body {
 
 /* Header: básico */
 header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     padding: 20px;
     background-color: #222;
     color: white;
-    text-align: center;
 }
 
 /* Container para centrar contenido vertical y horizontal */
@@ -85,4 +88,13 @@ header {
     background-color: #1e7e34;
 }
 
-/* CSS PARA EL LOGIN*/
+/* CSS PARA EL boton de cierre de sesion
+*/
+
+.logout-button {
+    color: white;              /* hace el texto blanco */
+    text-decoration: none;     /* quita el subrayado */
+    font-weight: bold;
+    margin-left: auto;         /* lo empuja a la derecha */
+}
+
