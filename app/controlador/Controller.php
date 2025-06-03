@@ -125,6 +125,7 @@ class Controller
 
                             $_SESSION['idUser'] = $usuario['id'];
                             $_SESSION['nombreUsuario'] = $usuario['username'];
+                            $_SESSION['photo']=$usuario['profile_image'];
                             if ($usuario['role'] == 'admin') {
                                 $_SESSION['nivel'] = 2;
                             } else {
