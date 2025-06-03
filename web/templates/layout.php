@@ -16,7 +16,7 @@
         <!-- Generar dinamicamente el menu y la info de usuariosi esta logueado-->
         <?php if (isset($_SESSION['nivel']) && $_SESSION['nivel'] > 0): ?>
             <nav class="main-menu">
-                <a href="#">Logbook</a>
+                <a href="index.php?ctl=home">Logbook</a>
                 <a href="#">Buscar</a>
                 <a href="#">Añadir</a>
                 <a href="#">Perfil</a>

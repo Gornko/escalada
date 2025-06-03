@@ -7,10 +7,6 @@ class Controller
         require __DIR__ . "/../../web/templates/inicio.php";
     }
 
-    public function home()
-    {
-        require __DIR__ . "/../../web/templates/home.php";
-    }
 
     public function logout()
     {
@@ -161,5 +157,25 @@ class Controller
     }
     //fin funcion login
 
+    //Empieza funcion home, asociada tambien a la pestaña Logbook, que lista las rutas del usuario
+    public function home()
+{
+    try {
+        $m = new RutasEscalada();
+        $params = $m->listarRutas($_SESSION['idUser']); // ← directamente la lista de rutas
 
+        if (empty($params)) {
+            $params['mensaje'] = "No hay rutas que mostrar.";
+        }
+
+    } catch (Exception $e) {
+        error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logExceptio.txt");
+        header('Location: index.php?ctl=error');
+    } catch (Error $e) {
+        error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logError.txt");
+        header('Location: index.php?ctl=error');
+    }
+
+    require __DIR__ . "/../../web/templates/home.php";
+}
 }

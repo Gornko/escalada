@@ -1,4 +1,6 @@
 
+/*ESTE CSS HAY QUE ORDENARLO Y COMENTARLO*/
+
 /* Reset básico */
 * {
     margin: 0;
@@ -158,4 +160,71 @@ header {
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
+}
+
+/*ESTILOS DE LA TABLA*/
+/* Estilo tabla general */
+ table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+    background-color: white;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Cabecera */
+ thead tr {
+    background-color: #296978;
+    color: white;
+    text-align: left;
+}
+
+ thead th {
+    padding: 12px 15px;
+    font-weight: 600;
+}
+
+/* Filas del cuerpo */
+ tbody tr {
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+ tbody tr:hover {
+    background-color: #f0f7fa;
+}
+
+/* Celdas */
+ tbody td {
+    padding: 10px 15px;
+    color: #333;
+    vertical-align: top;
+    word-wrap: break-word;
+}
+
+/* Comentarios con salto de línea respetado */
+ tbody td:last-child {
+    white-space: pre-wrap;
+}
+
+/* Para mejorar legibilidad en filas pares */
+ tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.title-table {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #296978;
+    margin-bottom: 15px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+}
+
+.tablaContainer{
+    text-align: center;
 }
