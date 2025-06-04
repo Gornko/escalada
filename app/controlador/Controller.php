@@ -57,7 +57,6 @@ class Controller
                     if ($m->insertarUsuario($nombreUsuario, $email, encriptar($contrasenya))) {
 
                         $params['mensaje'] = 'Usuario registrado correctamente.';
-                       
                     } else {
 
                         $params = array(
@@ -121,7 +120,7 @@ class Controller
 
                             $_SESSION['idUser'] = $usuario['id'];
                             $_SESSION['nombreUsuario'] = $usuario['username'];
-                            $_SESSION['photo']=$usuario['profile_image'];
+                            $_SESSION['photo'] = $usuario['profile_image'];
                             if ($usuario['role'] == 'admin') {
                                 $_SESSION['nivel'] = 2;
                             } else {
@@ -159,23 +158,75 @@ class Controller
 
     //Empieza funcion home, asociada tambien a la pestaña Logbook, que lista las rutas del usuario
     public function home()
-{
-    try {
-        $m = new RutasEscalada();
-        $params = $m->listarRutas($_SESSION['idUser']); // ← directamente la lista de rutas
+    {
+        try {
+            $m = new RutasEscalada();
+            $params = $m->listarRutas($_SESSION['idUser']); // ← directamente la lista de rutas
 
-        if (empty($params)) {
-            $params['mensaje'] = "No hay rutas que mostrar.";
+            if (empty($params)) {
+                $params['mensaje'] = "No hay rutas que mostrar.";
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logExceptio.txt");
+            header('Location: index.php?ctl=error');
+        } catch (Error $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logError.txt");
+            header('Location: index.php?ctl=error');
         }
 
-    } catch (Exception $e) {
-        error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logExceptio.txt");
-        header('Location: index.php?ctl=error');
-    } catch (Error $e) {
-        error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logError.txt");
-        header('Location: index.php?ctl=error');
+        require __DIR__ . "/../../web/templates/home.php";
     }
 
-    require __DIR__ . "/../../web/templates/home.php";
-}
+    public function buscar()
+    {
+        require __DIR__ . "/../../web/templates/buscar.php";
+    }
+
+    public function anyadir()
+    {
+        try{
+            $errores=[];
+            $params=array(
+                'nombre'=>'',
+                'metros'=>'',
+                'cintas'=>'',
+                'pais'=>'',
+                'localidad'=>'',
+                'estilo'=>'',
+                'largos'=>'',
+                'pegues'=>'',
+                'encadene'=>'',
+                'fecha'=>'',
+                'comentarios'=>''
+            );
+
+            if(isset($_POST['bAnyadir'])){
+                
+            }
+
+
+        }catch (Exception $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logExceptio.txt");
+            header('Location: index.php?ctl=error');
+        } catch (Error $e) {
+            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logError.txt");
+            header('Location: index.php?ctl=error');
+        }
+        require __DIR__ . "/../../web/templates/anyadir.php";
+    }
+
+    public function perfil()
+    {
+        require __DIR__ . "/../../web/templates/perfil.php";
+    }
+
+    public function stats()
+    {
+        require __DIR__ . "/../../web/templates/stats.php";
+    }
+
+    public function admin()
+    {
+        require __DIR__ . "/../../web/templates/admin.php";
+    }
 }

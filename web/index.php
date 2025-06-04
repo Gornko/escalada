@@ -25,7 +25,12 @@ $map=array(
     'error'=>array('controller'=>'Controller', 'action'=>'error', 'nivel'=>0),
     'home'=>array('controller'=>'Controller', 'action'=>'home', 'nivel'=>1),
     'registro'=>array('controller'=>'Controller', 'action'=>'registro', 'nivel'=>0),
-    'logout'=>array('controller'=>'Controller', 'action'=>'logout', 'nivel'=>1)
+    'logout'=>array('controller'=>'Controller', 'action'=>'logout', 'nivel'=>1),
+    'buscar'=>array('controller'=>'Controller', 'action'=>'buscar', 'nivel'=>1),
+    'anyadir'=>array('controller'=>'Controller', 'action'=>'anyadir', 'nivel'=>1),
+    'perfil'=>array('controller'=>'Controller', 'action'=>'perfil', 'nivel'=>1),
+    'stats'=>array('controller'=>'Controller', 'action'=>'stats', 'nivel'=>1),
+    'admin'=>array('controller'=>'Controller', 'action'=>'admin', 'nivel'=>2)
 );
 
 
