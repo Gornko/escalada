@@ -430,5 +430,60 @@ function comprobarhash($pass, $passBD) {
     // Primero comprobamos si se ha empleado una contraseña correcta:
     return password_verify($pass, $passBD) ;
 }
+
+//validar fecha dd/mm/aaaa
+function cFechaddmmaaaa(string $fecha, string $campo, array &$errores, string $min = "01/01/1900", string $max = "31/12/2100"): bool
+{
+    // Verifica el formato dd/mm/aaaa
+    if (preg_match("/^\d{2}\/\d{2}\/\d{4}$/", $fecha)) {
+        list($dia, $mes, $anio) = explode("/", $fecha);
+
+        // Verifica si la fecha es válida (calendario real)
+        if (checkdate((int)$mes, (int)$dia, (int)$anio)) {
+            // Convertimos las fechas a timestamp para comparar rangos
+            $fechaTimestamp = strtotime("$anio-$mes-$dia");
+            $minTimestamp = strtotime(implode("-", array_reverse(explode("/", $min))));
+            $maxTimestamp = strtotime(implode("-", array_reverse(explode("/", $max))));
+
+            if ($fechaTimestamp < $minTimestamp || $fechaTimestamp > $maxTimestamp) {
+                $errores[$campo] = "La fecha en $campo debe estar entre $min y $max";
+                return false;
+            }
+
+            return true;
+        } else {
+            $errores[$campo] = "La fecha ingresada en $campo no es válida";
+            return false;
+        }
+    }
+
+    $errores[$campo] = "Formato de fecha no válido en $campo. Use dd/mm/aaaa";
+    return false;
+}
+
+function cFechaaaaammdd(string $fecha, string $campo, array &$errores, string $min = "1900-01-01", string $max = "2100-12-31"): bool
+{
+    // Verifica si el formato es correcto con una expresión regular
+    if (preg_match("/^\d{4}-\d{2}-\d{2}$/", $fecha)) {
+        $timestamp = strtotime($fecha);
+        if ($timestamp === false) {
+            $errores[$campo] = "Fecha no válida en $campo";
+            return false;
+        }
+
+        // Compara con los límites mínimos y máximos
+        if ($fecha < $min || $fecha > $max) {
+            $errores[$campo] = "La fecha en $campo debe estar entre $min y $max";
+            return false;
+        }
+
+        return true;
+    }
+
+    $errores[$campo] = "Formato de fecha no válido en $campo";
+    return false;
+}
+
+
     
     ?>

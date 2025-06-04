@@ -31,9 +31,34 @@ class RutasEscalada extends Model
                         JOIN ascent_types a ON r.ascent_type_id = a.id
                         WHERE r.user_id = :idUsuario -- ← aquí colocas el ID del usuario logueado
                         ORDER BY r.date DESC;";
-        $result= $this->conection->prepare($consulta);
+        $result = $this->conection->prepare($consulta);
         $result->bindParam('idUsuario', $idUsuario);
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function insertarRuta($idUsuario,$nombre,$metros = '',$cintas = '',$pais = '',$localidad = '',$estilo = '',
+                                $largos = '',$pegues = '',$encadene = '',$fecha = '',$comentarios = '') 
+    {
+        $consulta = "INSERT INTO escalada.routes (user_id, `name`, meters, draws, country, `location`, style_id, pitches, tries, ascent_type_id, `date`, comments)
+                    VALUES (:idUsuario, :nombre, :metros, :cintas, :pais, :localidad, :estilo, :largos, :pegues, :encadene, :fecha, :comentarios)";
+        
+        $result=$this->conection->prepare($consulta);
+        $result->bindParam(':idUsuario', $idUsuario);
+        $result->bindParam('nombre', $nombre);
+        $result->bindParam('metros', $metros);
+        $result->bindParam('cintas', $cintas);
+        $result->bindParam('pais', $pais);
+        $result->bindParam('localidad', $localidad);
+        $result->bindParam('estilo', $estilo);
+        $result->bindParam('largos', $largos);
+        $result->bindParam('pegues', $pegues);
+        $result->bindParam('encadene', $encadene);
+        $result->bindParam('fecha', $fecha);
+        $result->bindParam('comentarios', $comentarios);
+
+        $result->execute();
+        return $result;
+
     }
 }

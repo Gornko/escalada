@@ -182,36 +182,114 @@ class Controller
         require __DIR__ . "/../../web/templates/buscar.php";
     }
 
+
+    //comiena funcion de anyadir una ruta
     public function anyadir()
     {
-        try{
-            $errores=[];
-            $params=array(
-                'nombre'=>'',
-                'metros'=>'',
-                'cintas'=>'',
-                'pais'=>'',
-                'localidad'=>'',
-                'estilo'=>'',
-                'largos'=>'',
-                'pegues'=>'',
-                'encadene'=>'',
-                'fecha'=>'',
-                'comentarios'=>''
-            );
+        $errores = [];
+        $params = array(
+            'nombre' => '',
+            'metros' => '',
+            'cintas' => '',
+            'pais' => '',
+            'localidad' => '',
+            'estilo' => '',
+            'largos' => '',
+            'pegues' => '',
+            'encadene' => '',
+            'fecha' => '',
+            'comentarios' => ''
+        );
 
-            if(isset($_POST['bAnyadir'])){
-                
+        if (isset($_POST['bAnyadir'])) {
+            $nombre = recoge('routename');
+            $metros = recoge('metros');
+            $cintas = recoge('cintas');
+            $pais = recoge('pais');
+            $localidad = recoge('localidad');
+            $estilo = recoge('estilo');
+            $largos = recoge('largos');
+            $pegues = recoge('pegues');
+            $encadene = recoge('encadene');
+            $fecha = recoge('fecha');
+            $comentarios = recoge('comentarios');
+
+            cTexto($nombre, 'nombre', $errores);
+            cNum($metros, 'metros', $errores);
+            cNum($cintas, 'cintas', $errores);
+            cTexto($pais, 'pais', $errores);
+            cTexto($localidad, 'localidad', $errores);
+            cNum($estilo, 'estilo', $errores);
+            cNum($largos, 'largos', $errores);
+            cNum($pegues, 'pegues', $errores);
+            cNum($encadene, 'encadene', $errores);
+            cFechaaaaammdd($fecha, 'fecha', $errores);
+            cTexto($comentarios, 'comentarios', $errores, 100);
+
+
+            if (empty($errores)) {
+                try {
+
+                    $m = new RutasEscalada();
+                    if ($m->insertarRuta(
+                        $_SESSION['idUser'],
+                        $nombre,
+                        $metros,
+                        $cintas,
+                        $pais,
+                        $localidad,
+                        $estilo,
+                        $largos,
+                        $pegues,
+                        $encadene,
+                        $fecha,
+                        $comentarios
+                    )) {
+                        $params['mensaje'] = "Ruta insertada correctamente.";
+                    } else {
+                        $params = array(
+                            'nombre' => $nombre,
+                            'metros' => $metros,
+                            'cintas' => $cintas,
+                            'pais' => $pais,
+                            'localidad' => $localidad,
+                            'estilo' => $estilo,
+                            'largos' => $largos,
+                            'pegues' => $pegues,
+                            'encadene' => $encadene,
+                            'fecha' => $fecha,
+                            'comentarios' => $comentarios
+                        );
+
+                        $params['mensaje'] = 'No se ha podido insertar la ruta. Revisa el formulario.';
+                    }
+                } catch (Exception $e) {
+                    error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logExceptio.txt");
+                    header('Location: index.php?ctl=error');
+                } catch (Error $e) {
+                    error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logError.txt");
+                    header('Location: index.php?ctl=error');
+                }
+            } else {
+                $params = array(
+                    'nombre' => $nombre,
+                    'metros' => $metros,
+                    'cintas' => $cintas,
+                    'pais' => $pais,
+                    'localidad' => $localidad,
+                    'estilo' => $estilo,
+                    'largos' => $largos,
+                    'pegues' => $pegues,
+                    'encadene' => $encadene,
+                    'fecha' => $fecha,
+                    'comentarios' => $comentarios
+                );
+
+                $params['mensaje'] = 'Hay datos que no son correctos. Revisa el formulario.';
             }
-
-
-        }catch (Exception $e) {
-            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logExceptio.txt");
-            header('Location: index.php?ctl=error');
-        } catch (Error $e) {
-            error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logError.txt");
-            header('Location: index.php?ctl=error');
         }
+
+
         require __DIR__ . "/../../web/templates/anyadir.php";
     }
 
