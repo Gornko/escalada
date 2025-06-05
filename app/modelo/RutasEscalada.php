@@ -29,7 +29,7 @@ class RutasEscalada extends Model
                         FROM routes r
                         JOIN styles s ON r.style_id = s.id
                         JOIN ascent_types a ON r.ascent_type_id = a.id
-                        WHERE r.user_id = :idUsuario -- ← aquí colocas el ID del usuario logueado
+                        WHERE r.user_id = :idUsuario 
                         ORDER BY r.date DESC;";
         $result = $this->conection->prepare($consulta);
         $result->bindParam('idUsuario', $idUsuario);
@@ -60,5 +60,37 @@ class RutasEscalada extends Model
         $result->execute();
         return $result;
 
+    }
+
+
+    public function buscarRutas($idUsuario,$params, $campo)
+    {
+        switch($campo){
+            case 'nombre':
+                $columna='r.name';
+                break;
+            case 'pais':
+                $columna='r.country';
+                break;
+            case 'estilo':
+                $columna='r.style_id';
+                break;
+            case 'encadene':
+                $columna='r.ascent_type_id';
+                break;
+        }
+
+        $consulta = "SELECT r.id, r.name AS route_name, r.meters, r.draws, r.country, r.location, s.name AS style,
+                            r.pitches, r.tries, a.name AS ascent_type, r.date, r.comments, r.photo
+                        FROM routes r
+                        JOIN styles s ON r.style_id = s.id
+                        JOIN ascent_types a ON r.ascent_type_id = a.id
+                        WHERE r.user_id = :idUsuario AND $columna = :valor
+                        ORDER BY r.date DESC;";
+        $result = $this->conection->prepare($consulta);
+        $result->bindParam(':idUsuario', $idUsuario);
+        $result->bindParam(':valor', $params);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 }

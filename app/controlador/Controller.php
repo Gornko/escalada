@@ -179,6 +179,50 @@ class Controller
 
     public function buscar()
     {
+        $errores = [];
+        $params = [];
+        $rutas = [];
+
+
+        if (isset($_POST['bNombre']) || isset($_POST['bPais']) || isset($_POST['bEstilo']) || isset($_POST['bEncadene'])) {
+
+            if (isset($_POST['bNombre'])) {
+                $nombre = recoge('routename');
+                cTexto($nombre, 'nombre', $errores);
+                $params['param'] = $nombre;
+                $campo = 'nombre';
+            } else if (isset($_POST['bPais'])) {
+                $pais = recoge('pais');
+                cTexto($pais, 'pais', $errores);
+                $params['param'] = $pais;
+                $campo = 'pais';
+            } else if (isset($_POST['bEstilo'])) {
+                $estilo = recoge('estilo');
+                cNum($estilo, 'estilo', $errores);
+                $params['param'] = $estilo;
+                $campo = 'estilo';
+            } else if (isset($_POST['bEncadene'])) {
+                $encadene = recoge('encadene');
+                cNum($encadene, 'encadene', $errores);
+                $params['param'] = $encadene;
+                $campo = 'encadene';
+            }
+
+            if (empty($errores)) {
+                try {
+                    $m = new RutasEscalada();
+                    $rutas = $m->buscarRutas($_SESSION['idUser'], $params['param'], $campo);
+                } catch (Exception $e) {
+                    error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logExceptio.txt");
+                    header('Location: index.php?ctl=error');
+                } catch (Error $e) {
+                    error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logError.txt");
+                    header('Location: index.php?ctl=error');
+                }
+            } else {
+                $params['mensaje'] = 'Error en algun campo.';
+            }
+        }
         require __DIR__ . "/../../web/templates/buscar.php";
     }
 

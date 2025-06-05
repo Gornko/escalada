@@ -1,1 +1,14 @@
 SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Pau' for key 'username'0.02033200 1748959665
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '= NULL-- ← aquí colocas el ID del usuario logueado
+                      ...' at line 60.08747400 1749158802
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '= NULL-- ← aquí colocas el ID del usuario logueado
+                      ...' at line 60.36676500 1749158804
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '= NULL-- ← aquí colocas el ID del usuario logueado
+                      ...' at line 60.47244000 1749158806
+Campo no válido.0.71953400 1749158891
+Campo no válido.0.34998200 1749158894
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '= NULL-- ← aquí colocas el ID del usuario logueado
+                      ...' at line 60.07939300 1749158916
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'style' in 'where clause'0.29783600 1749159625
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'style' in 'where clause'0.76044600 1749159641
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ascent_type' in 'where clause'0.12232400 1749159650
