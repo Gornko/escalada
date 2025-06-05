@@ -1,24 +1,14 @@
-<?php ob_start() ?>
+<?php ob_start(); ?>
 
-
-
-<div class="home-container">
-    <!-- Logo -->
-     
-    
-
-    <div class="login-container">
-    <h2>Holi</h2>
-    <br>
-    
+<div class="tablaContainer">
+    <h2 class="title-table">Sección en construcción</h2>
+    <p style="font-size: 1.2rem; color: #555; margin-top: 20px;">
+        Esta sección está actualmente en desarrollo. ¡Vuelve pronto!
+    </p>
+    <img src="../web/images/appimages/under_construction.png" alt="En construcción" style="margin-top: 30px; width: 150px;">
 </div>
-
-
-</div>
-
 
 <?php
 $contenido = ob_get_clean();
 include __DIR__ . '/layout.php';
-
 ?>

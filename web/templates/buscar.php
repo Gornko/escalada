@@ -97,6 +97,7 @@
         </div>
 
     </div>
+    <br>
 
     <div class="tablaContainer">
         <h2 class="title-table">Resultado:</h2>

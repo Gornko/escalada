@@ -1,24 +1,21 @@
-<?php ob_start() ?>
+<?php ob_start(); ?>
 
+<div class="delete-user-container">
+    <h2>Eliminar usuario</h2>
 
+    <?php if (isset($params['mensaje'])): ?>
+        <p style="color:red;"><?php echo htmlspecialchars($params['mensaje']); ?></p>
+    <?php endif; ?>
 
-<div class="home-container">
-    <!-- Logo -->
-     
-    
+    <form action="index.php?ctl=eliminarUsuario" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
+        <label for="user_id">ID del usuario a eliminar:</label>
+        <input type="number" id="user_id" name="user_id" required>
 
-    <div class="login-container">
-    <h2>Holi</h2>
-    <br>
-    
+        <button type="submit" class="logout-button">Eliminar usuario</button>
+    </form>
 </div>
-
-
-</div>
-
 
 <?php
 $contenido = ob_get_clean();
 include __DIR__ . '/layout.php';
-
 ?>
