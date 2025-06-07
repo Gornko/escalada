@@ -22,7 +22,7 @@
     <div class="register-container">
 
         <br>
-        <form action="index.php?ctl=registro" method="post" class="register-form">
+        <form action="index.php?ctl=registro" method="post" class="register-form" enctype="multipart/form-data">
             <label for="username">Nombre de usuario</label>
             <input type="text" id="username" name="username" required placeholder="Elige un nombre de usuario">
             <br>
@@ -37,8 +37,13 @@
 
             <label for="confirm_password">Confirmar contraseña</label>
             <input type="password" id="confirm_password" name="confirm_password" required placeholder="Repite la contraseña">
-            <br><br>
+            <br>
 
+            <label for="foto">Imagen de perfil</label>
+            <input type="file" id="foto" name="foto"  >
+            <br>
+
+            <br>
             <button type="submit" class="btn btn-register" name="bRegistro">Registrarse</button>
         </form>
     </div>

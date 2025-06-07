@@ -44,6 +44,25 @@ class Controller
             $contrasenya = recoge('password');
             $contrasenyaBis = recoge('confirm_password');
 
+            if (isset($_FILES['foto'])) {
+                $tmpName = $_FILES['foto']['tmp_name'];
+                $fileName = time().$_FILES['foto']['name'];
+
+                if (is_uploaded_file($tmpName)) {
+                    $uploadDir = __DIR__ . '/../../web/images/users/'; 
+                    $uploadPath = $uploadDir . basename($fileName);
+
+                    if (move_uploaded_file($tmpName, $uploadPath)) {
+                        //
+                    } else {
+                        $errores['foto']="Error al subir la foto";
+                    }
+                } else {
+                    $errores['foto']="Archivo no valido";
+                }
+            }
+
+
             // Comprobar campos formulario. Aqui va la validación con las funciones de bGeneral o la clase Validacion         
             cTexto($nombreUsuario, "nombre de usuario", $errores);
             cEmail($email, "email", $errores);
@@ -54,7 +73,7 @@ class Controller
                 try {
 
                     $m = new RutasEscalada();
-                    if ($m->insertarUsuario($nombreUsuario, $email, encriptar($contrasenya))) {
+                    if ($m->insertarUsuario($nombreUsuario, $email, encriptar($contrasenya), $fileName)) {
 
                         $params['mensaje'] = 'Usuario registrado correctamente.';
                     } else {
@@ -359,7 +378,7 @@ class Controller
             $idUsuario = recoge('user_id');
             cNum($idUsuario, 'id', $errores);
             if (empty($errores)) {
-                if ($idUsuario == 1 || $idUsuario==2) {
+                if ($idUsuario == 1 || $idUsuario == 2) {
                     $params['mensaje'] = 'No puedes borrar al administrador';
                 } else {
                     try {

@@ -20,6 +20,7 @@
                 <th>Encadene</th>
                 <th>Fecha</th>
                 <th>Comentarios</th>
+                <th>Media</th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +40,7 @@
                         <td><?= htmlspecialchars($ruta['ascent_type']) ?></td>
                         <td><?= htmlspecialchars($ruta['date']) ?></td>
                         <td><?= nl2br(htmlspecialchars($ruta['comments'])) ?></td>
+                        <td>prueba</td>
                     </tr>
                 <?php endforeach; ?>
             <?php endif; ?>

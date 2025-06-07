@@ -2,13 +2,14 @@
 class RutasEscalada extends Model
 {
 
-    public function insertarUsuario($nombreUsuario, $email,  $contrasenya)
+    public function insertarUsuario($nombreUsuario, $email,  $contrasenya, $fileName)
     {
-        $consulta = "INSERT INTO escalada.users (username, email, password_hash) VALUES (:nombreUsuario, :email, :password_hash)";
+        $consulta = "INSERT INTO escalada.users (username, email, password_hash, profile_image) VALUES (:nombreUsuario, :email, :password_hash, :profile_image)";
         $result = $this->conection->prepare($consulta);
         $result->bindParam(':nombreUsuario', $nombreUsuario);
         $result->bindParam(':email', $email);
         $result->bindParam(':password_hash', $contrasenya);
+        $result->bindParam(':profile_image', $fileName);
         $result->execute();
         return $result;
     }
@@ -96,7 +97,8 @@ class RutasEscalada extends Model
 
     public function eliminarUsuario($idUsuario){
 
-        $consulta="DELETE FROM users WHERE id = :id";
+        $consulta="DELETE FROM routes WHERE user_id=:id;
+                    DELETE FROM users WHERE id = :id";
         $result=$this->conection->prepare($consulta);
         $result->bindParam(':id', $idUsuario);
         $result->execute();
