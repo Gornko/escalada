@@ -17,8 +17,11 @@
 
         </div>
 
+        <h2>Buscar por:</h2>
+        <br>
+
         <div class="register-container">
-            <h2>Buscar por:</h2>
+            
             <br>
             <form action="index.php?ctl=buscar" method="post" class="register-form">
 

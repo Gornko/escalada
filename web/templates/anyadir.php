@@ -16,8 +16,9 @@
 
     </div>
 
+    <h2>Nueva ascensión</h2>
     <div class="register-container">
-        <h2>Nueva ascensión</h2>
+        
         <br>
         <form action="index.php?ctl=anyadir" method="post" class="register-form">
 

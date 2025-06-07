@@ -94,6 +94,8 @@ class Controller
 
     //empieza funcion iniciar sesion/login
     public function login()
+    //contraseña del admin1 -> 1234
+    //contraseña del admin2 -> admin
     {
         try {
             $params = array(
@@ -121,7 +123,7 @@ class Controller
                             $_SESSION['idUser'] = $usuario['id'];
                             $_SESSION['nombreUsuario'] = $usuario['username'];
                             $_SESSION['photo'] = $usuario['profile_image'];
-                            $_SESSION['email']=$usuario['email'];
+                            $_SESSION['email'] = $usuario['email'];
                             if ($usuario['role'] == 'admin') {
                                 $_SESSION['nivel'] = 2;
                             } else {
@@ -350,6 +352,36 @@ class Controller
 
     public function admin()
     {
+        $params = [];
+        $errores = [];
+
+        if (isset($_POST['bEliminar'])) {
+            $idUsuario = recoge('user_id');
+            cNum($idUsuario, 'id', $errores);
+            if (empty($errores)) {
+                if ($idUsuario == 1 || $idUsuario==2) {
+                    $params['mensaje'] = 'No puedes borrar al administrador';
+                } else {
+                    try {
+                        $m = new RutasEscalada();
+                        if ($m->eliminarUsuario($idUsuario)) {
+                            $params['mensaje'] = "Usuario eliminado correctamente.";
+                        } else {
+                            $params['mensaje'] = "No se ha podido eliminar.";
+                        }
+                    } catch (Exception $e) {
+                        error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logExceptio.txt");
+                        header('Location: index.php?ctl=error');
+                    } catch (Error $e) {
+                        error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logError.txt");
+                        header('Location: index.php?ctl=error');
+                    }
+                }
+            } else {
+                $params['mensaje'] = 'Ha habido algun problema con el formulario';
+            }
+        }
+
         require __DIR__ . "/../../web/templates/admin.php";
     }
 }

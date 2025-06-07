@@ -93,4 +93,14 @@ class RutasEscalada extends Model
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function eliminarUsuario($idUsuario){
+
+        $consulta="DELETE FROM users WHERE id = :id";
+        $result=$this->conection->prepare($consulta);
+        $result->bindParam(':id', $idUsuario);
+        $result->execute();
+        return $result;
+
+    }
 }

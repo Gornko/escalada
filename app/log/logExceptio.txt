@@ -12,3 +12,9 @@ SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in you
 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'style' in 'where clause'0.29783600 1749159625
 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'style' in 'where clause'0.76044600 1749159641
 SQLSTATE[42S22]: Column not found: 1054 Unknown column 'ascent_type' in 'where clause'0.12232400 1749159650
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '* FROM users WHERE id = '5'' at line 10.61757100 1749278478
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '* FROM users WHERE id = '6'' at line 10.33496400 1749278492
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '* FROM users WHERE id = '6'' at line 10.00147000 1749278559
+SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`escalada`.`routes`, CONSTRAINT `routes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`))0.05435400 1749279467
+SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`escalada`.`routes`, CONSTRAINT `routes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`))0.73397600 1749279738
+SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`escalada`.`routes`, CONSTRAINT `routes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`))0.16382500 1749279769

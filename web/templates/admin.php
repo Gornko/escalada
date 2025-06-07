@@ -7,11 +7,11 @@
         <p style="color:red;"><?php echo htmlspecialchars($params['mensaje']); ?></p>
     <?php endif; ?>
 
-    <form action="index.php?ctl=eliminarUsuario" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
+    <form action="index.php?ctl=admin" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
         <label for="user_id">ID del usuario a eliminar:</label>
         <input type="number" id="user_id" name="user_id" required>
 
-        <button type="submit" class="logout-button">Eliminar usuario</button>
+        <button type="submit" class="logout-button" name="bEliminar">Eliminar usuario</button>
     </form>
 </div>
 

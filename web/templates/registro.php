@@ -16,9 +16,11 @@
 
     </div>
 
+    <h2>Registro</h2>
+    <br>
 
     <div class="register-container">
-        <h2>Registro</h2>
+
         <br>
         <form action="index.php?ctl=registro" method="post" class="register-form">
             <label for="username">Nombre de usuario</label>
