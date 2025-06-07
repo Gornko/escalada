@@ -40,7 +40,7 @@
                         <td><?= htmlspecialchars($ruta['ascent_type']) ?></td>
                         <td><?= htmlspecialchars($ruta['date']) ?></td>
                         <td><?= nl2br(htmlspecialchars($ruta['comments'])) ?></td>
-                        <td><?= htmlspecialchars($ruta['photo']) ?></td>
+                        <td><a href="images/routes/<?= htmlspecialchars($ruta['photo']) ?>">Imagen</a></td>
                     </tr>
                 <?php endforeach; ?>
             <?php endif; ?>
