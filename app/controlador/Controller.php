@@ -44,23 +44,23 @@ class Controller
             $contrasenya = recoge('password');
             $contrasenyaBis = recoge('confirm_password');
 
-            if (isset($_FILES['foto'])) {
+            if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
                 $tmpName = $_FILES['foto']['tmp_name'];
-                $fileName = time().$_FILES['foto']['name'];
+                $fileName = time() . $_FILES['foto']['name'];
 
-                if (is_uploaded_file($tmpName)) {
-                    $uploadDir = __DIR__ . '/../../web/images/users/'; 
-                    $uploadPath = $uploadDir . basename($fileName);
+                $uploadDir = __DIR__ . '/../../web/images/users/';
+                $uploadPath = $uploadDir . basename($fileName);
 
-                    if (move_uploaded_file($tmpName, $uploadPath)) {
-                        //
-                    } else {
-                        $errores['foto']="Error al subir la foto";
-                    }
+                if (move_uploaded_file($tmpName, $uploadPath)) {
+                    // todo OK
                 } else {
-                    $errores['foto']="Archivo no valido";
+                    $errores['foto'] = "Error al subir la foto";
                 }
+            } else {
+                $fileName = 'default.png'; // usar imagen por defecto si no se subió nada
             }
+
+            //faltaria validar la imagen correctamente
 
 
             // Comprobar campos formulario. Aqui va la validación con las funciones de bGeneral o la clase Validacion         
@@ -280,6 +280,23 @@ class Controller
             $fecha = recoge('fecha');
             $comentarios = recoge('comentarios');
 
+            if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+                $tmpName = $_FILES['foto']['tmp_name'];
+                $fileName = time() . $_FILES['foto']['name'];
+
+                $uploadDir = __DIR__ . '/../../web/images/routes/';
+                $uploadPath = $uploadDir . basename($fileName);
+
+                if (move_uploaded_file($tmpName, $uploadPath)) {
+                    // todo OK
+                } else {
+                    $errores['foto'] = "Error al subir la foto";
+                }
+            } else {
+                $fileName = 'defaultRoute.png'; // usar imagen por defecto si no se subió nada
+            }
+            
+
             cTexto($nombre, 'nombre', $errores);
             cNum($metros, 'metros', $errores);
             cNum($cintas, 'cintas', $errores);
@@ -291,6 +308,7 @@ class Controller
             cNum($encadene, 'encadene', $errores);
             cFechaaaaammdd($fecha, 'fecha', $errores);
             cTexto($comentarios, 'comentarios', $errores, 100);
+            //faltaria validar la imagen correctamente
 
 
             if (empty($errores)) {
@@ -309,7 +327,8 @@ class Controller
                         $pegues,
                         $encadene,
                         $fecha,
-                        $comentarios
+                        $comentarios,
+                        $fileName
                     )) {
                         $params['mensaje'] = "Ruta insertada correctamente.";
                     } else {

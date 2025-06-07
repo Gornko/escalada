@@ -141,7 +141,7 @@
                             <td><?= htmlspecialchars($ruta['ascent_type']) ?></td>
                             <td><?= htmlspecialchars($ruta['date']) ?></td>
                             <td><?= nl2br(htmlspecialchars($ruta['comments'])) ?></td>
-                            <td>prueba</td>
+                            <td><?= htmlspecialchars($ruta['photo']) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php endif; ?>

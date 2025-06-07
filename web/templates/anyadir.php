@@ -20,7 +20,7 @@
     <div class="register-container">
         
         <br>
-        <form action="index.php?ctl=anyadir" method="post" class="register-form">
+        <form action="index.php?ctl=anyadir" method="post" class="register-form" enctype="multipart/form-data">
 
             <label for="routename">Nombre de la ruta</label>
             <input type="text" id="routename" name="routename" required placeholder="Nombre de la ruta">
@@ -73,6 +73,10 @@
 
             <label for="comentarios">Comentarios</label>
             <input type="text" id="comentarios" name="comentarios" required placeholder="Max 100 caracteres">
+            <br>
+
+            <label for="foto">Imagen</label>
+            <input type="file" id="foto" name="foto"  >
             <br>
 
 
