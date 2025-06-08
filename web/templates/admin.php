@@ -1,5 +1,6 @@
 <?php ob_start(); ?>
 
+<!-- VISTA ADMIN, PERMITE ELIMINAR USUARIO POR ID-->
 <div class="delete-user-container">
     <h2>Eliminar usuario</h2>
 

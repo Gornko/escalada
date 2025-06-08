@@ -1,6 +1,6 @@
 <?php ob_start() ?>
 
-
+<!-- VISTA LOGIN, SOLO SI NO HAY SESION NIVEL 1 O +, LOGUEA Y MANDA A HOME-->
 
 <div class="home-container">
     <!-- Logo -->

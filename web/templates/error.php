@@ -1,6 +1,6 @@
 <?php ob_start() ?>
 
-
+<!-- VISTA ERROR GENERICA-->
 
 <div class="home-container">
     <!-- Logo -->

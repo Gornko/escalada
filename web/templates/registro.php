@@ -1,5 +1,7 @@
 <?php ob_start() ?>
 
+<!-- VISTA REGISTRO, PERMITE REGISTRAR NUEVO USUARIO EN LA BD-->
+
 <div class="home-container">
     <!-- Logo -->
     <a href="index.php"><img src="../web/images/appimages/logo.png" alt="Logo de la App" class="home-logo"></a>

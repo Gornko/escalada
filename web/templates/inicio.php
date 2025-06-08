@@ -1,5 +1,7 @@
 <?php ob_start() ?>
 
+<!-- VISTA INICIO, PRIMERA PAGINA A LA QUE REDIRIGE EL INDEX, SI NO ESTAS LOGEADO-->
+
 <div class="home-container">
     <!-- Logo -->
     <img src="../web/images/appimages/logo.png" alt="Logo de la App" class="home-logo">

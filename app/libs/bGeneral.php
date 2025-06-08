@@ -461,6 +461,7 @@ function cFechaddmmaaaa(string $fecha, string $campo, array &$errores, string $m
     return false;
 }
 
+//validar fecha en formato aaaa/mm/dd
 function cFechaaaaammdd(string $fecha, string $campo, array &$errores, string $min = "1900-01-01", string $max = "2100-12-31"): bool
 {
     // Verifica si el formato es correcto con una expresión regular

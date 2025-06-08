@@ -13,6 +13,7 @@ require_once __DIR__."/../app/modelo/RutasEscalada.php";
 //iniciamos la sesion
 session_start();
 
+//si no se ha definido la session, se definde en nivel 0
 if (!isset($_SESSION['nivel'])) {
     $_SESSION['nivel'] = 0;
 }
@@ -49,7 +50,7 @@ if(isset($_GET['ctl'])){
 $controlador = $map[$ruta];
 
 
-
+//se llama al metodo correspondiente
 if (method_exists($controlador['controller'], $controlador['action'])) {
     if ($_SESSION['nivel'] >= $controlador['nivel']  ) {
         call_user_func(array(

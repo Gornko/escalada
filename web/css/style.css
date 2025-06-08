@@ -1,5 +1,5 @@
 
-/*ESTE CSS HAY QUE ORDENARLO Y COMENTARLO*/
+/*ESTE CSS HAY QUE ORDENARLO Y COMENTARLO MEJOR*/
 
 /* Reset básico */
 * {
@@ -57,15 +57,15 @@ header {
 }
 
 .infoUser p {
-    font-family: "Segoe UI", "Helvetica", "Verdana", "Tahoma", sans-serif; /* o la fuente que prefieras */
-    font-size: 1.5rem; /* opcional: tamaño de fuente */
-    font-weight: bold; /* opcional: negrita */
-    color: white; /* asegúrate de que se vea en fondo oscuro */
+    font-family: "Segoe UI", "Helvetica", "Verdana", "Tahoma", sans-serif; 
+    font-size: 1.5rem; 
+    font-weight: bold; 
+    color: white; 
 }
 
 /* Container para centrar contenido vertical y horizontal */
 .container {
-    flex: 1; /* ocupa todo el espacio entre header y footer */
+    flex: 1; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -207,12 +207,12 @@ header {
     word-wrap: break-word;
 }
 
-/* Comentarios con salto de línea respetado */
+
  tbody td:last-child {
     white-space: pre-wrap;
 }
 
-/* Para mejorar legibilidad en filas pares */
+
  tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }

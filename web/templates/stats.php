@@ -1,5 +1,7 @@
 <?php ob_start(); ?>
 
+<!-- VISTA ESTADISTIAS, MUESTRA CARTEL DE EN CONSTRUCCION-->
+
 <div class="tablaContainer">
     <h2 class="title-table">Sección en construcción</h2>
     <p style="font-size: 1.2rem; color: #555; margin-top: 20px;">

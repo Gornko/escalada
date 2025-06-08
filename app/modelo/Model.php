@@ -1,4 +1,5 @@
 <?php
+// Clase que conecta a la BD
 class Model
 {
     protected $conection = null;

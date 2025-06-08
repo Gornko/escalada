@@ -14,6 +14,7 @@ class RutasEscalada extends Model
         return $result;
     }
 
+    //devuelve la info de un usuario
     public function consultarUsuario($nombreUsuario)
     {
         $consulta = "SELECT * FROM escalada.users WHERE username=:nombreUsuario ";
@@ -64,7 +65,7 @@ class RutasEscalada extends Model
 
     }
 
-
+// la funcion busca en la tabla rutas en funcion del campo que se le pase por parametro
     public function buscarRutas($idUsuario,$params, $campo)
     {
         switch($campo){
@@ -96,6 +97,7 @@ class RutasEscalada extends Model
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    //elimina usuario segun id
     public function eliminarUsuario($idUsuario){
 
         $consulta="DELETE FROM routes WHERE user_id=:id;

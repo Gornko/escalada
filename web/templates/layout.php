@@ -32,7 +32,7 @@
                 <a href="index.php?ctl=anyadir">Añadir</a>
                 <a href="index.php?ctl=perfil">Perfil</a>
                 <a href="index.php?ctl=stats">Estadísticas</a>
-                <?php if($_SESSION['nivel']==2): ?>
+                <?php if($_SESSION['nivel']==2): ?> <!-- solo se muestra si el nivel es el del admin-->
                     <a href="index.php?ctl=admin">Admin</a>
                 <?php endif;?>
             </nav>
@@ -42,14 +42,16 @@
             <div class="user-actions">
                 <div class="infoUser">
 
-                    <p><?php echo $_SESSION['nombreUsuario'] ?></p>
+                    <p><?php echo $_SESSION['nombreUsuario'] ?></p> <!-- muestra el nombre del usuario-->
+                <!-- muestra la imagen de perfil-->
                     <img class="userImg" src="/dwes/Extraordinaria/evaluableextraordinaria/web/images/users/<?php echo $_SESSION['photo'] ?>" alt="No">
                 </div>
-                <a href="index.php?ctl=logout" class="logout-button">Cerrar sesión</a>
+                <a href="index.php?ctl=logout" class="logout-button">Cerrar sesión</a> <!-- boton de cierre de sesion-->
             </div>
         <?php endif; ?>
     </header>
 
+                <!-- div para el contenido generado dinamicamente desde las plantillas-->
     <div class="container">
         <?php echo $contenido ?>
     </div>

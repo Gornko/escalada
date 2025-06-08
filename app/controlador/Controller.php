@@ -2,12 +2,14 @@
 class Controller
 {
 
+    //dirige a la pagina de inicio
     public function inicio()
     {
         require __DIR__ . "/../../web/templates/inicio.php";
     }
 
 
+    //destruye la sesion y redirige a la pagina de inicio
     public function logout()
     {
         session_destroy();
@@ -15,6 +17,7 @@ class Controller
         header("location:index.php?ctl=inicio");
     }
 
+    //redirige a pagina generica de error
     public function error()
     {
         require __DIR__ . "/../../web/templates/error.php";
@@ -25,6 +28,7 @@ class Controller
     public function registro()
     {
 
+        //si esta definido el nivel del usuario a mas de 0, entonces ya esta logueado y manda al home
         if ($_SESSION['nivel'] > 0) {
             header("location:index.php?ctl=home");
         }
@@ -38,12 +42,14 @@ class Controller
 
         );
 
+        //sanitizar
         if (isset($_POST['bRegistro'])) {
             $nombreUsuario = recoge('username');
             $email = recoge('email');
             $contrasenya = recoge('password');
             $contrasenyaBis = recoge('confirm_password');
 
+            //si se ha seleccionado una foto, la sube, sino pasa la de por defecto
             if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
                 $tmpName = $_FILES['foto']['tmp_name'];
                 $fileName = time() . $_FILES['foto']['name'];
@@ -59,17 +65,17 @@ class Controller
             } else {
                 $fileName = 'default.png'; // usar imagen por defecto si no se subió nada
             }
-
             //faltaria validar la imagen correctamente
 
 
-            // Comprobar campos formulario. Aqui va la validación con las funciones de bGeneral o la clase Validacion         
+            // validacion         
             cTexto($nombreUsuario, "nombre de usuario", $errores);
             cEmail($email, "email", $errores);
             cUser($contrasenya, "contrasenya", $errores);
             cUser($contrasenyaBis, "confirmar contrasenya", $errores);
-            if (empty($errores)) {
-                // Si no ha habido problema creo modelo y hago inserción     
+
+            //si no hay errores, instancio modelo y hago consulta
+            if (empty($errores)) {   
                 try {
 
                     $m = new RutasEscalada();
@@ -94,7 +100,7 @@ class Controller
                     error_log($e->getMessage() . microtime() . PHP_EOL, 3, "../app/log/logError.txt");
                     header('Location: index.php?ctl=error');
                 }
-            } else {
+            } else { //si hay errores lo pasamos por params y se imprime en la plantilla
                 $params = array(
                     'nombreUsuario' => $nombreUsuario,
                     'email' => $email,
@@ -122,15 +128,17 @@ class Controller
                 'contrasenya' => ''
             );
 
-
+            //si esta definido el nivel del usuario a mas de 0, entonces ya esta logueado y manda al home
             if ($_SESSION['nivel'] > 0) {
                 header("location:index.php?ctl=home");
             }
-            if (isset($_POST['bLogin'])) { // Nombre del boton del formulario
+
+            //sanitizar
+            if (isset($_POST['bLogin'])) { 
                 $nombreUsuario = recoge('username');
                 $contrasenya = recoge('password');
 
-                // Comprobar campos formulario. Aqui va la validación con las funciones de bGeneral   
+                //validar
                 if (cUser($nombreUsuario, "nombreUsuario", $params)) {
                     // Si no ha habido problema creo modelo y hago consulta                    
                     $m = new RutasEscalada();
@@ -149,7 +157,7 @@ class Controller
                                 $_SESSION['nivel'] = 1;
                             }
 
-
+                            //despues de obtenidos datos del usuario, dirige al home
                             header('Location: index.php?ctl=home');
                         }
                     } else {
@@ -178,14 +186,15 @@ class Controller
     }
     //fin funcion login
 
+
     //Empieza funcion home, asociada tambien a la pestaña Logbook, que lista las rutas del usuario
     public function home()
     {
         try {
             $m = new RutasEscalada();
-            $params = $m->listarRutas($_SESSION['idUser']); // ← directamente la lista de rutas
+            $params = $m->listarRutas($_SESSION['idUser']); // ← directamente imprime la lista de rutas del usuario
 
-            if (empty($params)) {
+            if (empty($params)) { //si no tiene rutas, lo indica
                 $params['mensaje'] = "No hay rutas que mostrar.";
             }
         } catch (Exception $e) {
@@ -199,15 +208,18 @@ class Controller
         require __DIR__ . "/../../web/templates/home.php";
     }
 
+
+    //empieza funcion de buscar una ruta en la BD
     public function buscar()
     {
         $errores = [];
         $params = [];
         $rutas = [];
 
-
+        //si se pulsa el clguno de los botonos:
         if (isset($_POST['bNombre']) || isset($_POST['bPais']) || isset($_POST['bEstilo']) || isset($_POST['bEncadene'])) {
 
+            //dependiendo del boton que se pulse recoge un dato distinto
             if (isset($_POST['bNombre'])) {
                 $nombre = recoge('routename');
                 cTexto($nombre, 'nombre', $errores);
@@ -249,7 +261,7 @@ class Controller
     }
 
 
-    //comiena funcion de anyadir una ruta
+    //comienza funcion de anyadir una ruta
     public function anyadir()
     {
         $errores = [];
@@ -267,6 +279,7 @@ class Controller
             'comentarios' => ''
         );
 
+        //si se pulsa boton de anyadir, recoge y sanitiza la info
         if (isset($_POST['bAnyadir'])) {
             $nombre = recoge('routename');
             $metros = recoge('metros');
@@ -280,6 +293,7 @@ class Controller
             $fecha = recoge('fecha');
             $comentarios = recoge('comentarios');
 
+            //si se ha incluido imagen, la sube
             if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
                 $tmpName = $_FILES['foto']['tmp_name'];
                 $fileName = time() . $_FILES['foto']['name'];
@@ -292,11 +306,11 @@ class Controller
                 } else {
                     $errores['foto'] = "Error al subir la foto";
                 }
-            } else {
-                $fileName = 'defaultRoute.png'; // usar imagen por defecto si no se subió nada
+            } else { //si no se ha subido, pone imagen por defecto
+                $fileName = 'defaultRoute.png'; 
             }
             
-
+            //validacion
             cTexto($nombre, 'nombre', $errores);
             cNum($metros, 'metros', $errores);
             cNum($cintas, 'cintas', $errores);
@@ -310,7 +324,7 @@ class Controller
             cTexto($comentarios, 'comentarios', $errores, 100);
             //faltaria validar la imagen correctamente
 
-
+            //consulta
             if (empty($errores)) {
                 try {
 
@@ -378,16 +392,19 @@ class Controller
         require __DIR__ . "/../../web/templates/anyadir.php";
     }
 
+    //redirige al perfil, donde se pintan los datos de la sesion
     public function perfil()
     {
         require __DIR__ . "/../../web/templates/perfil.php";
     }
 
+    //redirige a estadisticas, donde se mostraran estadisticas, en construccion
     public function stats()
     {
         require __DIR__ . "/../../web/templates/stats.php";
     }
 
+    //redirige a admin, donde podemos borrar usuario por id
     public function admin()
     {
         $params = [];
@@ -397,6 +414,7 @@ class Controller
             $idUsuario = recoge('user_id');
             cNum($idUsuario, 'id', $errores);
             if (empty($errores)) {
+                    //si el usuario elegido es el 1 o el 2, que son los admin, no deja
                 if ($idUsuario == 1 || $idUsuario == 2) {
                     $params['mensaje'] = 'No puedes borrar al administrador';
                 } else {

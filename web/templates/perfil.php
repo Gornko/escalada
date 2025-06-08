@@ -1,5 +1,7 @@
 <?php ob_start(); ?>
 
+<!-- VISTA PERFIL, MUESTRA LA INFO DE SESION DEL USUARIO-->
+
 <div class="tablaContainer">
     <h2 class="title-table">Datos del Usuario</h2>
     <table>

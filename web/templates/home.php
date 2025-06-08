@@ -1,5 +1,6 @@
 <?php ob_start() ?>
 
+<!-- VISTA HOME, APARECE COMO LOGBOOK. PAGINA QUE SE MUESTRA AL LOGUEARSE, Y PINTA DIRECTAMENTE LAS RUTAS DEL USUARIO-->
 
 <div class="tablaContainer">
     <h2 class="title-table">Logbook de ascensiones</h2>

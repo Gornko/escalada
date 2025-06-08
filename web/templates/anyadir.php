@@ -1,6 +1,6 @@
 <?php ob_start() ?>
 
-
+<!-- VISTA AÑADIR RUTA, PERMITE AÑADIR RUTAS ASOCIADAS AL USUARIO-->
 
 <div class="home-container">
 
